@@ -1,0 +1,11 @@
+services:
+  reasoning-fuzzy:
+    working_dir: /app
+    volumes:
+      - ./app/main.py:/app/main.py # For Python code
+      - ./app/main.lsp:/app/main.lsp # For Common Lisp code (Steel Bank Common Lisp compiler)
+    build:
+      context: .
+    image: tdarrelpa/ga-search:latest
+    container_name: general-genetic-algorithm
+    command: /bin/bash -c "python main.py && sbcl --load main.lsp"
